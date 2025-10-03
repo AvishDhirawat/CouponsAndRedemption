@@ -72,3 +72,15 @@ You should get a response with `"success": true` and a survey URL.
    `docker exec -it mysql mysql -ufestuser -pFestPass123! fest_coupons -e "SELECT * FROM redemptions LIMIT 5;"`  
 
 You should see an entry with the coupon ID, timestamp, and location/operator details.
+
+4. Generate QR Codes for Coupons  
+
+   Run the QR generator script inside the API container:  
+   `docker exec -it coupons_api python -m scripts.generate_qr_from_db`  
+
+   This will:  
+   - Create a `generated_qr/` folder with PNG QR code images for each coupon  
+   - Write a `coupon_qr_map.csv` file mapping coupon IDs and codes to their QR image paths  
+
+   These QR codes can be distributed to participants and scanned to redeem coupons.
+
