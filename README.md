@@ -28,3 +28,11 @@ Each participant gets unique coupons which can be redeemed once. Redemption is l
 - **scripts/** — Helper scripts to generate coupons and QR codes. Run as modules (`python -m scripts.generate_coupons_db`).  
 
 
+### 2. Build and run containers
+
+From the project root:
+
+```bash
+docker-compose up -d --build
+```
+This will build the FastAPI service, start the MySQL database, and bring up both containers in detached mode.
