@@ -5,6 +5,19 @@ Each participant gets unique coupons which can be redeemed once. Redemption is l
 
 ---
 
+## 📋 Requirements
+
+The system should provide a complete coupon management and redemption workflow for organizational events and fests:
+
+- Each participant receives **five unique coupons**, with a total of **500 participants** (2,500 coupons overall).  
+- Coupons must be **unique, trackable, and redeemable exactly once**.  
+- Redemption can be performed either by scanning a QR code or by entering the coupon code manually.  
+- Upon successful redemption, the participant should be presented with a **feedback survey link**.  
+- The system must **log each redemption**, including details such as timestamp, location, and operator.  
+- The solution should be **extensible**, allowing additional features (e.g., feedback capture, analytics, reporting) to be added without significant redesign.  
+- Administrative users should be able to **generate, categorize, and manage coupons**, while operators handle **redemption and logging** at stalls or activity points.  
+---
+
 ## 🚀 Features Implemented (Confirmed Working)
 
 - ✅ **Coupon Generation** (500 people × 5 coupons each = 2500 unique coupons)
