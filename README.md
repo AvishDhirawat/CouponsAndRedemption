@@ -37,7 +37,7 @@ docker-compose up -d --build
 ```
 This will build the FastAPI service, start the MySQL database, and bring up both containers in detached mode.
 
-## 🧪 Testing
+## 3. 🧪 Testing
 
 1. Open `http://localhost:8000` in your browser.  
    You should see: `{"status": "ok"}`  
@@ -73,7 +73,7 @@ You should get a response with `"success": true` and a survey URL.
 
 You should see an entry with the coupon ID, timestamp, and location/operator details.
 
-4. Generate QR Codes for Coupons  
+## 4. Generate QR Codes for Coupons  
 
    Run the QR generator script inside the API container:  
    `docker exec -it coupons_api python -m scripts.generate_qr_from_db`  
