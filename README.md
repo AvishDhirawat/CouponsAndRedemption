@@ -36,3 +36,39 @@ From the project root:
 docker-compose up -d --build
 ```
 This will build the FastAPI service, start the MySQL database, and bring up both containers in detached mode.
+
+## 🧪 Testing
+
+1. Open `http://localhost:8000` in your browser.  
+   You should see: `{"status": "ok"}`  
+
+2. Generate coupons by running the script inside the API container:  
+   `docker exec -it coupons_api python -m scripts.generate_coupons_db`  
+   This will insert 2500 coupons into the database.  
+
+3. Check that coupons exist in the database:  
+   `docker exec -it mysql mysql -ufestuser -pFestPass123! fest_coupons -e "SELECT id, code FROM coupons LIMIT 5;"`  
+
+4. Redeem a coupon (replace `<code>` with an actual code from the database):  
+   In PowerShell:
+   $headers = @{ "x-api-key" = "supersecret" }
+Invoke-RestMethod -Uri "http://localhost:8000/redeem?code=
+   **Linux (curl):**
+
+```bash
+curl -X POST "http://localhost:8000/redeem?code=
+<code>&location=food_stall&operator_id=staff1"
+-H "x-api-key: supersecret"
+```
+
+```bash
+
+You should get a response with `"success": true` and a survey URL.
+```
+6. Try redeeming the same coupon again.  
+   The response should say: `"detail": "Coupon already redeemed"`.  
+
+7. Verify that redemption is logged in the database:  
+   `docker exec -it mysql mysql -ufestuser -pFestPass123! fest_coupons -e "SELECT * FROM redemptions LIMIT 5;"`  
+
+You should see an entry with the coupon ID, timestamp, and location/operator details.
