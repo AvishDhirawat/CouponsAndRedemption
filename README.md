@@ -84,3 +84,26 @@ You should see an entry with the coupon ID, timestamp, and location/operator det
 
    These QR codes can be distributed to participants and scanned to redeem coupons.
 
+
+   ## 🔮 Future Enhancements
+
+- Add `/feedback` endpoint to capture ratings and comments directly into the database  
+- Provide an `/export` endpoint to download coupons and redemption data as CSV  
+- Build an admin dashboard for live redemption stats and feedback analytics  
+- Role-based access control (e.g., operators vs admins)  
+- Email or SMS delivery of coupons with QR codes  
+- Automated reporting (daily/weekly coupon usage summary)  
+
+---
+
+## 🛠️ Tech Stack
+
+- **Python 3.11** — application logic and scripts  
+- **FastAPI** — REST API framework  
+- **SQLAlchemy** — ORM for database interactions  
+- **MySQL 8.0** — database backend  
+- **Docker & Docker Compose** — container orchestration  
+- **qrcode** — Python library for QR code generation  
+- **PowerShell / curl** — for testing API endpoints  
+
+
