@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Redeem</title></head>
+<body>
+<h3>Scan coupon</h3>
+<div id="reader" style="width:320px"></div>
+<p>Or type code:</p>
+<input id="manual" />
+<button onclick="manualRedeem()">Redeem</button>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+const API_KEY = "PUT_STALL_API_KEY"; // keep short-lived if possible
+async function redeemCode(code){
+  const res = await fetch('/redeem', {
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json',
+      'X-API-Key': API_KEY
+    },
+    body: JSON.stringify({code: code, location: "Food-Stall-1", operator_id: "stall-operator-1"})
+  });
+  const j = await res.json();
+  if(res.ok){
+    window.location = j.survey_url; // redirect to survey immediately
+  } else {
+    alert(j.detail || JSON.stringify(j));
+  }
+}
+
+function manualRedeem(){
+  const code = document.getElementById('manual').value.trim();
+  if(code) redeemCode(code);
+}
+
+const html5QrcodeScanner = new Html5Qrcode("reader");
+html5QrcodeScanner.start(
+  { facingMode: "environment" },
+  { fps: 10 },
+  (decodedText, decodedResult) => {
+    // decodedText contains the coupon string
+    redeemCode(decodedText);
+    html5QrcodeScanner.stop();
+  },
+  (errorMessage) => { /* ignore scan errors */ }
+);
+</script>
+</body>
+</html>
